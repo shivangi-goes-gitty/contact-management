@@ -3,12 +3,14 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import store from './state/store';
 import Sidebar from './components/Sidebar';
+import { Route, BrowserRouter as Router, Routes, Outlet } from 'react-router-dom'; // Import BrowserRouter, Routes, and Outlet
 import ChartsAndMaps from './components/ChartsAndMaps';
 import SidebarContent from './components/SidebarContent';
-import Contacts from './components/Contacts';
+import ContactList from './components/ContactList'; // Import ContactList
 import ContactForm from './components/ContactForm';
 import Modal from './components/Modal';
-import ContactList from './components/ContactList'; // Import ContactList
+import Contacts from './components/Contacts'; // Import Contacts
+import Dashboard from './components/Dashboard'; // Import Dashboard
 
 function App() {
   const [activeTab, setActiveTab] = useState('contacts');
@@ -21,6 +23,7 @@ function App() {
     <div className="flex">
       <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
       <div className="w-4/5 p-4">
+        <Outlet /> {/* This is where child routes will be rendered */}
         {activeTab === 'contacts' && (
           <div className="text-center mb-4">
             <button
@@ -45,12 +48,18 @@ function App() {
   );
 }
 
-
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router> {/* Wrap your entire app in Router */}
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
 
-export default App; // Export the App component
+export default App;

@@ -30,33 +30,35 @@ const Contacts: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-4">Contacts</h1>
-      <ul className="divide-y divide-gray-200">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {contacts.map((contact) => (
-          <li key={contact.id} className="px-4 py-4 sm:px-6">
-            <div className="flex items-center justify-between">
-              <div className="text-lg leading-5 font-medium text-indigo-600 truncate">
+          <div
+            key={contact.id}
+            className="bg-white rounded-lg shadow-md"
+            style={{ width: '88px', height: '56px' }} // Set fixed width and height
+          >
+            <div className="p-2">
+              <div className="text-sm leading-5 font-medium text-indigo-600 truncate">
                 {contact.firstName} {contact.lastName}
               </div>
-              <div className="mt-2 sm:mt-0">
+              <div className="flex justify-between mt-1">
                 <button
-                  className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+                  className="text-indigo-600 hover:text-indigo-800 text-xs font-medium"
                   onClick={() => openPopup(contact)}
                 >
                   View Details
                 </button>
-              </div>
-              <div className="mt-2 sm:mt-0">
                 <button
-                  className="text-red-600 hover:text-red-800 text-sm font-medium"
-                  onClick={() => handleDeleteContact(contact.id)} // Pass the correct contact.id
+                  className="text-red-600 hover:text-red-800 text-xs font-medium"
+                  onClick={() => handleDeleteContact(contact.id)}
                 >
-                  Delete Contact
+                  Delete
                 </button>
               </div>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
 
       {isPopupOpen && <ContactDetailsPopup contact={selectedContact!} onClose={closePopup} />}
     </div>
