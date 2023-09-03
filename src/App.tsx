@@ -8,6 +8,7 @@ import SidebarContent from './components/SidebarContent';
 import Contacts from './components/Contacts';
 import ContactForm from './components/ContactForm';
 import Modal from './components/Modal';
+import ContactList from './components/ContactList'; // Import ContactList
 
 function App() {
   const [activeTab, setActiveTab] = useState('contacts');
@@ -30,7 +31,7 @@ function App() {
             </button>
           </div>
         )}
-        {activeTab === 'contacts' && <Contacts />}
+        {activeTab === 'contacts' && <ContactList />} {/* Use ContactList component here */}
         {activeTab === 'charts' && <ChartsAndMaps />}
         {activeTab === 'maps' && <h1>Maps Content</h1>}
         {activeTab === 'sidebar' && <SidebarContent />}
@@ -43,6 +44,7 @@ function App() {
     </div>
   );
 }
+
 
 ReactDOM.render(
   <Provider store={store}>

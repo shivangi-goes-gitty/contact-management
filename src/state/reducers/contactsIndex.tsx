@@ -1,4 +1,3 @@
-// reducers/index.ts
 import { combineReducers } from 'redux';
 import contactReducer from './contactReducer';
 
@@ -7,5 +6,7 @@ const rootReducer = combineReducers({
   // Add other reducers here if needed
 });
 
-export default rootReducer;
+// Infer the RootState type from the rootReducer
+export type RootState = ReturnType<typeof rootReducer>;
 
+export default rootReducer;

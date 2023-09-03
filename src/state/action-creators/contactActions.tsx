@@ -18,5 +18,7 @@ export interface UpdatedContact {
 
 // Define actions using the Contact and UpdatedContact types
 export const addContact = createAction<Contact>('addContact');
-export const deleteContact = createAction<number>('deleteContact');
+export const deleteContact = createAction<string>('deleteContact');
 export const updateContact = createAction<UpdatedContact>('updateContact');
+export const editContact = createAction<UpdatedContact>('editContact');
+

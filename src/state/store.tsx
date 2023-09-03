@@ -1,7 +1,5 @@
-// store.tsx
-
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers/contactsIndex'; // Correct the import path
+import rootReducer from './reducers/contactsIndex';
 
 const store = configureStore({
   reducer: rootReducer,

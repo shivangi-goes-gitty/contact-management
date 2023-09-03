@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../state/action-creators/contactActions';
 
 interface ContactFormProps {
   closeModal: () => void;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ closeModal }) => {
+  const dispatch = useDispatch(); // Get the dispatch function from react-redux
+
   const [contact, setContact] = useState({
     id: '',
     firstName: '',
@@ -15,8 +19,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ closeModal }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here (you can simulate saving data)
-    console.log('Contact Submitted:', contact);
+
+    // Dispatch the addContact action with the contact data
+    dispatch(addContact(contact));
+
+    // Reset the form fields and close the modal
     closeModal();
     setContact({
       id: '',
@@ -99,6 +106,27 @@ const ContactForm: React.FC<ContactFormProps> = ({ closeModal }) => {
                         required
                       />
                     </div>
+                    {/* Add this div to include the status input */}
+                    <div className="mb-4">
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor="status"
+                      >
+                        Status:
+                      </label>
+                      <select
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="status"
+                        value={contact.status}
+                        onChange={(e) =>
+                          setContact({ ...contact, status: e.target.value })
+                        }
+                        required
+                      >
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -130,4 +158,3 @@ const ContactForm: React.FC<ContactFormProps> = ({ closeModal }) => {
 };
 
 export default ContactForm;
-
