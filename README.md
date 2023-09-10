@@ -1,3 +1,4 @@
+This project stores,updates and deletes contacts. It also features a data visualization dashboard. It used react, redux, typescript and tailwind css
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
